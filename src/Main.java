@@ -21,7 +21,7 @@ public class Main {
             String parsedPokemonName = imageParser.readImageText("name");
             parsedPokemonName = parsedPokemonName.replaceAll("\\P{Print}","");
             if (Objects.equals(parsedPokemonName.toLowerCase(), pokemonName.toLowerCase())) {
-                if (imageParser.matchImageColor("name", new Color(200, 200, 200)) || imageParser.matchImageColor("type", new Color(130, 115, 150)) || imageParser.matchImageColor("type", new Color(0, 0, 0))) {
+                if (imageParser.matchImageColor("name", new Color(200, 200, 200)) && (imageParser.matchImageColor("type", new Color(130, 150, 115)) || imageParser.matchImageColor("type", new Color(0, 0, 0)))) {
                     System.out.println("kill");
                 } else {
                     System.out.println("not kill");

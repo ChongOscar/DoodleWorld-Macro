@@ -63,7 +63,6 @@ public class ImageParser {
         int avgRed = validPixelCount == 0 ? 0 : (int) (totalRed / validPixelCount);
         int avgGreen = validPixelCount == 0 ? 0 : (int) (totalGreen / validPixelCount);
         int avgBlue = validPixelCount == 0 ? 0 : (int) (totalBlue / validPixelCount);
-        System.out.println(avgRed + " " + avgBlue + " " + avgGreen);
         return new Color(avgRed, avgGreen, avgBlue);
     }
 

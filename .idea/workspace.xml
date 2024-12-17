@@ -4,23 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3e7c5594-cd03-4833-a873-bc3302e9b2f7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/bytedeco_javacpp_presets_tesseract.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/bytedeco_javacpp_presets_tesseract_platform.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/net_java_dev_jna.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/net_java_dev_jna_platform.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pokemon macro.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/name.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ImageParser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/MouseCoordinates.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ScreenCapture.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/type.png" afterDir="false" />
+    <list default="true" id="3e7c5594-cd03-4833-a873-bc3302e9b2f7" name="Changes" comment="detect special pokemon">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ImageParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ImageParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,9 +69,20 @@
       <option name="presentableId" value="Default" />
       <updated>1734314170074</updated>
     </task>
+    <task id="LOCAL-00001" summary="detect special pokemon">
+      <option name="closed" value="true" />
+      <created>1734403966228</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1734403966228</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="detect special pokemon" />
+    <option name="LAST_COMMIT_MESSAGE" value="detect special pokemon" />
   </component>
 </project>
