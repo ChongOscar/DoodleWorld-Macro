@@ -4,10 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3e7c5594-cd03-4833-a873-bc3302e9b2f7" name="Changes" comment="detect special pokemon">
+    <list default="true" id="3e7c5594-cd03-4833-a873-bc3302e9b2f7" name="Changes" comment="fixed special detection">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/github_kwhat_jnativehook.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/HotkeyListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Macro.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Runner.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/StringSimilarity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pokemon macro.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Pokemon macro.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/name.png" beforeDir="false" afterPath="$PROJECT_DIR$/name.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ImageParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ImageParser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ScreenCapture.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ScreenCapture.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +58,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "project.structure.last.edited": "Libraries",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "configurable.group.appearance"
@@ -59,6 +68,28 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\OhLoo\IdeaProjects\Pokemon macro" />
     </key>
+  </component>
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="Pokemon macro" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MouseCoordinates" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MouseCoordinates" />
+      <module name="Pokemon macro" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.MouseCoordinates" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -77,12 +108,21 @@
       <option name="project" value="LOCAL" />
       <updated>1734403966228</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="fixed special detection">
+      <option name="closed" value="true" />
+      <created>1734404663050</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1734404663050</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="detect special pokemon" />
-    <option name="LAST_COMMIT_MESSAGE" value="detect special pokemon" />
+    <MESSAGE value="fixed special detection" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed special detection" />
   </component>
 </project>

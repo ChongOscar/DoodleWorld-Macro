@@ -10,9 +10,10 @@ import static org.bytedeco.javacpp.lept.pixDestroy;
 import static org.bytedeco.javacpp.lept.pixRead;
 
 public class ImageParser {
-    tesseract.TessBaseAPI api;
-    BytePointer outText;
-    lept.PIX image;
+    private tesseract.TessBaseAPI api;
+    private BytePointer outText;
+    private lept.PIX image;
+
     public ImageParser() {
         api = new tesseract.TessBaseAPI();
         // Initialize tesseract-ocr with English, without specifying tessdata path

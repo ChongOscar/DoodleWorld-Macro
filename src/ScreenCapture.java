@@ -8,7 +8,8 @@ import static org.bytedeco.javacpp.tesseract.*;
 
 
 public class ScreenCapture {
-    Robot robot;
+    private Robot robot;
+
     public ScreenCapture() throws AWTException {
         robot = new Robot();
     }

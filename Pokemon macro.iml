@@ -10,6 +10,7 @@
     <orderEntry type="library" exported="" name="net.java.dev.jna" level="application" />
     <orderEntry type="library" exported="" name="net.java.dev.jna.platform" level="project" />
     <orderEntry type="library" exported="" name="bytedeco.javacpp.presets.tesseract.platform" level="project" />
-    <orderEntry type="library" name="bytedeco.javacpp.presets.tesseract" level="project" />
+    <orderEntry type="library" exported="" name="bytedeco.javacpp.presets.tesseract" level="project" />
+    <orderEntry type="library" exported="" name="github.kwhat.jnativehook" level="project" />
   </component>
 </module>
