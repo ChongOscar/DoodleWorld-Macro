@@ -27,7 +27,7 @@ public class Runner {
         isNormal = true;
         isCaptured = true;
         attack1Toggle = true;
-        attack2Toggle = false;
+        attack2Toggle = true;
         attack3Toggle = true;
         attack4Toggle = true;
     }
@@ -36,7 +36,7 @@ public class Runner {
         // Start global key listener
         GlobalScreen.registerNativeHook();
         GlobalScreen.addNativeKeyListener(new HotkeyListener(this));
-        String pokemonName = "Statikeet";
+        String pokemonName = "Elektiel";
         while (true) {
             if (run) {
                 String parsedPokemonName = getImageText(370, 140, 500, 60, "name");
@@ -87,7 +87,7 @@ public class Runner {
         screenCapture.captureImage(x, y, width, height, name);
         String string = imageParser.readImageText(name);
         System.out.println(string);
-        return string.replaceAll("\\P{Print}","");
+        return string;
     }
 
     private boolean isMoveAvaliable(String str) {

@@ -12,8 +12,8 @@ import static org.bytedeco.javacpp.tesseract.*;
 
 public class Main {
     public static void main(String[] args) throws IOException, AWTException, NativeHookException, InterruptedException {
-        Runner runner = new Runner();
-        runner.run();
-
+//        Runner runner = new Runner();
+//        runner.run();
+        MainFrame f = new MainFrame();
     }
 }

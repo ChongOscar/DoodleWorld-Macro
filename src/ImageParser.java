@@ -28,7 +28,21 @@ public class ImageParser {
         api.SetImage(image);
         // Get OCR result
         outText = api.GetUTF8Text();
-        return outText.getString();
+        String str = outText.getString();
+        str.replaceAll("\\P{Print}","");
+        String newstr = "";
+        for (int i = 0; i < str.length() - 1; i++) {
+            if (str.substring(i, i + 2).equals("’r") || str.substring(i, i + 2).equals("'r")) {
+                newstr += "t";
+                i++;
+            } else if (str.substring(i, i + 2).equals("r‘")) {
+                newstr += "r";
+                i++;
+            } else {
+                newstr += str.substring(i, i+ 1);
+            }
+        }
+        return newstr;
     }
 
     public Color getAverageRGBNoBackground(String imageName, Color backgroundColor, int threshold) throws IOException {
