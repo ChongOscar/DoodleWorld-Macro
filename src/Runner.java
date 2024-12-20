@@ -1,5 +1,6 @@
 import com.github.kwhat.jnativehook.GlobalScreen;
 import com.github.kwhat.jnativehook.NativeHookException;
+import net.sourceforge.tess4j.TesseractException;
 
 import java.awt.*;
 import java.io.IOException;
@@ -26,13 +27,13 @@ public class Runner {
         isWhite = true;
         isNormal = true;
         isCaptured = true;
-        attack1Toggle = true;
-        attack2Toggle = true;
+        attack1Toggle = false;
+        attack2Toggle = false;
         attack3Toggle = true;
-        attack4Toggle = true;
+        attack4Toggle = false;
     }
 
-    public void run() throws AWTException, IOException, NativeHookException, InterruptedException {
+    public void run() throws AWTException, IOException, NativeHookException, InterruptedException, TesseractException {
         // Start global key listener
         GlobalScreen.registerNativeHook();
         GlobalScreen.addNativeKeyListener(new HotkeyListener(this));
@@ -83,7 +84,7 @@ public class Runner {
         run = !run;
     }
 
-    private String getImageText(int x, int y, int width, int height, String name) {
+    private String getImageText(int x, int y, int width, int height, String name) throws TesseractException {
         screenCapture.captureImage(x, y, width, height, name);
         String string = imageParser.readImageText(name);
         System.out.println(string);

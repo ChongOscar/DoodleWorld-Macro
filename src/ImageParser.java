@@ -1,48 +1,31 @@
-import org.bytedeco.javacpp.BytePointer;
-import org.bytedeco.javacpp.lept;
-import org.bytedeco.javacpp.tesseract;
 import javax.imageio.ImageIO;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import static org.bytedeco.javacpp.lept.pixDestroy;
-import static org.bytedeco.javacpp.lept.pixRead;
+import net.sourceforge.tess4j.ITesseract;
+import net.sourceforge.tess4j.Tesseract;
+import net.sourceforge.tess4j.TesseractException;
 
 public class ImageParser {
-    private tesseract.TessBaseAPI api;
-    private BytePointer outText;
-    private lept.PIX image;
+    private ITesseract tesseract;
 
     public ImageParser() {
-        api = new tesseract.TessBaseAPI();
-        // Initialize tesseract-ocr with English, without specifying tessdata path
-        if (api.Init(null, "eng") != 0) {
-            System.err.println("Could not initialize tesseract.");
-            System.exit(1);
-        }
+        // Initialize Tesseract instance
+        tesseract = new Tesseract();
+
+        String projectRoot = System.getProperty("user.dir"); // Get the project's root directory
+        tesseract.setDatapath(projectRoot + "/tessdata");
+
+        // Set the language (e.g., English)
+        tesseract.setLanguage("eng");
     }
 
-    public String readImageText(String name) {
-        image = pixRead(name + ".png");
-        api.SetImage(image);
-        // Get OCR result
-        outText = api.GetUTF8Text();
-        String str = outText.getString();
-        str.replaceAll("\\P{Print}","");
-        String newstr = "";
-        for (int i = 0; i < str.length() - 1; i++) {
-            if (str.substring(i, i + 2).equals("’r") || str.substring(i, i + 2).equals("'r")) {
-                newstr += "t";
-                i++;
-            } else if (str.substring(i, i + 2).equals("r‘")) {
-                newstr += "r";
-                i++;
-            } else {
-                newstr += str.substring(i, i+ 1);
-            }
-        }
-        return newstr;
+    public String readImageText(String name) throws TesseractException {
+        File imageFile = new File(name + ".png");
+        String str = tesseract.doOCR(imageFile);
+        str.replaceAll("\\P{Print}", "");
+        return str;
     }
 
     public Color getAverageRGBNoBackground(String imageName, Color backgroundColor, int threshold) throws IOException {
@@ -89,12 +72,6 @@ public class ImageParser {
     }
 
     public boolean matchImageColor(String imageName, Color matchColor) throws IOException {
-        return isSimilarColor(getAverageRGBNoBackground(imageName, new Color(50,102,132,255), 30), matchColor, 30);
-    }
-
-    public void end() {
-        api.End();
-        outText.deallocate();
-        pixDestroy(image);
+        return isSimilarColor(getAverageRGBNoBackground(imageName, new Color(50, 102, 132, 255), 30), matchColor, 30);
     }
 }
