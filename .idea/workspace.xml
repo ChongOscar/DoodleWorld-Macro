@@ -5,19 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3e7c5594-cd03-4833-a873-bc3302e9b2f7" name="Changes" comment="added program window">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/net_sourceforge_tess4j.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/slf4j_simple.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tessdata/eng.traineddata" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/bytedeco_javacpp_presets_tesseract.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/bytedeco_javacpp_presets_tesseract_platform.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/big-textbox.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/button-image-off.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/button-image-on.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/name-textbox.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/switch-image.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Switch.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/SwitchList.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TextBox.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pokemon macro.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Pokemon macro.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pokemon macro.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Doodle World Macro.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/attack1.png" beforeDir="false" afterPath="$PROJECT_DIR$/attack1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/attack2.png" beforeDir="false" afterPath="$PROJECT_DIR$/attack2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/attack3.png" beforeDir="false" afterPath="$PROJECT_DIR$/attack3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/attack4.png" beforeDir="false" afterPath="$PROJECT_DIR$/attack4.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/name.png" beforeDir="false" afterPath="$PROJECT_DIR$/name.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ImageParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ImageParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Button.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Button.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GraphicsPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GraphicsPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/HotkeyListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Macro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Macro.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Runner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Runner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ScreenCapture.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ScreenCapture.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/type.png" beforeDir="false" afterPath="$PROJECT_DIR$/type.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -35,9 +47,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 0
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="2qHKg5Z0VACKRFjJuraCVGR4aNu" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -63,25 +75,26 @@
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15527344",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "configurable.group.appearance"
+    "settings.editor.selected.configurable": "inlay.hints"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\OhLoo\IdeaProjects\Pokemon macro\assets" />
       <recent name="C:\Users\OhLoo\IdeaProjects\Pokemon macro" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="Pokemon macro" />
+      <module name="Doodle World Macro" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="MouseCoordinates" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="MouseCoordinates" />
-      <module name="Pokemon macro" />
+      <module name="Doodle World Macro" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>

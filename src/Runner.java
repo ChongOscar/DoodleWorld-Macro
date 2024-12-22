@@ -1,5 +1,8 @@
 import com.github.kwhat.jnativehook.GlobalScreen;
 import com.github.kwhat.jnativehook.NativeHookException;
+import com.sun.jna.Native;
+import com.sun.jna.platform.win32.User32;
+import com.sun.jna.platform.win32.WinDef;
 import net.sourceforge.tess4j.TesseractException;
 
 import java.awt.*;
@@ -8,6 +11,7 @@ import java.util.Objects;
 
 public class Runner {
     private boolean run;
+    private String pokemonName;
     private boolean isWhite;
     private boolean isNormal;
     private boolean isCaptured;
@@ -19,15 +23,16 @@ public class Runner {
     private ImageParser imageParser;
     private ScreenCapture screenCapture;
 
-    public Runner() throws AWTException {
+    public Runner(String pokemonName) throws AWTException {
         macro = new Macro();
         imageParser = new ImageParser();
         screenCapture = new ScreenCapture();
         run = true;
+        this.pokemonName = pokemonName.replaceAll("\\s+","");
         isWhite = true;
         isNormal = true;
         isCaptured = true;
-        attack1Toggle = false;
+        attack1Toggle = true;
         attack2Toggle = false;
         attack3Toggle = true;
         attack4Toggle = false;
@@ -35,11 +40,8 @@ public class Runner {
 
     public void run() throws AWTException, IOException, NativeHookException, InterruptedException, TesseractException {
         // Start global key listener
-        GlobalScreen.registerNativeHook();
-        GlobalScreen.addNativeKeyListener(new HotkeyListener(this));
-        String pokemonName = "Elektiel";
         while (true) {
-            if (run) {
+            if (run && getFocusedWindow().equals("Roblox")) {
                 String parsedPokemonName = getImageText(370, 140, 500, 60, "name");
                 screenCapture.captureImage(362, 245, 50, 50, "type");
 
@@ -112,6 +114,19 @@ public class Runner {
         } catch (NumberFormatException e) {
             return false;
         }
+    }
+
+    private String getFocusedWindow() {
+        // Get the handle of the currently focused window
+        WinDef.HWND hwnd = User32.INSTANCE.GetForegroundWindow();
+        if (hwnd != null) {
+            // Get the window title
+            char[] windowText = new char[512];
+            User32.INSTANCE.GetWindowText(hwnd, windowText, 512);
+
+            return Native.toString(windowText);
+        }
+        return "";
     }
 }
 
