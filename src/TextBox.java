@@ -78,6 +78,7 @@ public class TextBox {
                 } else if (type == BIG) {
                     g.setFont(new Font("Courier New", Font.BOLD, 18));
                     g.drawString("Doodle exceptions", x + 15, displayY + 30);
+                    g.drawString("Separate with ,", x + 15, displayY + 30 + g.getFontMetrics().getHeight());
                 }
 
             }
@@ -111,6 +112,8 @@ public class TextBox {
     public String getString() {
         return string;
     }
+
+    public void setString(String string) {this.string = string;}
 
     public void addChar(char newChar) {
         if (type == NAME) {

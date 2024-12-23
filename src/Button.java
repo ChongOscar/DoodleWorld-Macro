@@ -66,7 +66,7 @@ public class Button {
         isOn = !isOn;
     }
 
-    public boolean IsOn() {
+    public boolean isOn() {
        return isOn;
     }
 }

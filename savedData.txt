@@ -1,0 +1,16 @@
+Uniques=true
+bigTextBox=nepteros, pandishi
+Other cosmetics=true
+Any uniques=true
+Stop condition: =false
+Misprints=true
+Any misprints=false
+Skins=true
+Any skins=false
+Move 1=true
+nameTextBox=Elektiel
+Move 2=true
+Any other cosmetics=false
+Move 3=true
+Move 4=true
+Kill exceptions=false

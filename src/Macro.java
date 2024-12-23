@@ -56,7 +56,7 @@ public class Macro {
         robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK); // Release the left mouse button
     }
 
-    public void run() {
+    public void runAway() {
         robot.mouseMove(2000, 1010);
         robot.mousePress(InputEvent.BUTTON1_DOWN_MASK); // Press the left mouse button
         robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK); // Release the left mouse button

@@ -16,7 +16,7 @@ public class ScreenCapture {
             // Capture the screen area as a BufferedImage
             BufferedImage pokemonName = robot.createScreenCapture(captureArea);
             // Save the captured image to a file
-            File outputFile = new File(outputName +".png");
+            File outputFile = new File("screencaptures/" + outputName +".png");
             ImageIO.write(pokemonName, "png", outputFile);
         } catch (Exception e) {
             e.printStackTrace();

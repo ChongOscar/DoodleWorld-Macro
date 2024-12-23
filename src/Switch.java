@@ -66,7 +66,7 @@ public class Switch {
         }
     }
 
-    public boolean IsOn() {
+    public boolean isOn() {
         return isOn;
     }
 }

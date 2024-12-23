@@ -22,14 +22,14 @@ public class ImageParser {
     }
 
     public String readImageText(String name) throws TesseractException {
-        File imageFile = new File(name + ".png");
+        File imageFile = new File("screencaptures/" + name + ".png");
         String str = tesseract.doOCR(imageFile);
         str.replaceAll("\\P{Print}", "");
         return str;
     }
 
-    public Color getAverageRGBNoBackground(String imageName, Color backgroundColor, int threshold) throws IOException {
-        File inputFile = new File(imageName + ".png"); // Path to your image
+    public Color getAverageRGBNoBackground(String imageName, int threshold) throws IOException {
+        File inputFile = new File("screencaptures/" + imageName + ".png"); // Path to your image
         BufferedImage image = ImageIO.read(inputFile);
 
         int width = image.getWidth();
@@ -44,7 +44,7 @@ public class ImageParser {
                 Color color = new Color(pixel, true); // true to include alpha
 
                 // Check if the pixel is similar to the background color
-                if (isSimilarColor(color, backgroundColor, threshold)) {
+                if (isSimilarColor(color, new Color(50,102,132), threshold) || color.getAlpha() == 0 || isSimilarColor(color, new Color(5, 27, 27), threshold)) {
                     // Make the pixel transparent (remove background)
                     image.setRGB(x, y, new Color(0, 0, 0, 0).getRGB());
                 } else {
@@ -72,6 +72,6 @@ public class ImageParser {
     }
 
     public boolean matchImageColor(String imageName, Color matchColor) throws IOException {
-        return isSimilarColor(getAverageRGBNoBackground(imageName, new Color(50, 102, 132, 255), 30), matchColor, 30);
+        return isSimilarColor(getAverageRGBNoBackground(imageName, 15), matchColor, 15);
     }
 }

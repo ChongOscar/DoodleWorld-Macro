@@ -23,8 +23,16 @@ public class SwitchList {
         return null;
     }
 
+    public String getName(int i) {
+        return names.get(i);
+    }
+
     public Switch get(int i) {
         return switches.get(i);
+    }
+
+    public Object[] getall() {
+        return switches.toArray();
     }
 
     public int length() {
