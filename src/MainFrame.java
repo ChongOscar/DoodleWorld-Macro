@@ -12,9 +12,10 @@ import java.io.IOException;
 public class MainFrame implements Runnable {
 
     private GraphicsPanel panel;
+    private JFrame frame;
 
     public MainFrame() throws IOException, NativeHookException, AWTException {
-        JFrame frame = new JFrame("Doodle World Macro");
+        frame = new JFrame("Doodle World Macro");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(960, 580); // 540 height of image + 40 for window menu bar
         frame.setResizable(false);
@@ -25,8 +26,6 @@ public class MainFrame implements Runnable {
         panel = new GraphicsPanel(frame);
         frame.add(panel);
         // display the frame
-        frame.setVisible(true);
-
         // start thread, required for animation
         Thread thread = new Thread(this);
         thread.start();
@@ -43,5 +42,9 @@ public class MainFrame implements Runnable {
         while (true) {
             panel.repaint();  // we don't call "paintComponent" directly; we use repaint() instead
         }
+    }
+
+    public void setVisible() {
+        frame.setVisible(true);
     }
 }

@@ -13,8 +13,6 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
-
 public class GraphicsPanel extends JPanel implements KeyListener, MouseListener, ActionListener, MouseWheelListener {
     private Frame frame;
     private BufferedImage background;
@@ -78,7 +76,7 @@ public class GraphicsPanel extends JPanel implements KeyListener, MouseListener,
         super.paintComponent(g);  // just do this
 //        g.drawImage(background, 0, 0, null);
         g.setFont(new Font("Courier New", Font.BOLD, 40));
-        g.drawString("Doodle World Macro", frame.getWidth() / 2 - g.getFontMetrics().stringWidth("Doodle World Macro") / 2, 50 + scrollOffset);
+        g.drawString("Doodle World Macro", (frame.getWidth() - 17) / 2 - g.getFontMetrics().stringWidth("Doodle World Macro") / 2, 50 + scrollOffset);
         g.setFont(new Font("Courier New", Font.BOLD, 15));
         g.drawString("Hotkey: F6", 535, 75 + scrollOffset);
         g.setFont(new Font("Courier New", Font.BOLD, 25));
@@ -89,9 +87,9 @@ public class GraphicsPanel extends JPanel implements KeyListener, MouseListener,
             g.drawString(switchList.getName(i), switchList.get(i).getX() + 80, switchList.get(i).getY() + 20 + scrollOffset);
         }
         if (switchList.get("Stop condition: ").isOn()) {
-            g.drawString("And", 300, 510);
+            g.drawString("And", 300, 510 + scrollOffset);
         } else {
-            g.drawString("Or", 300, 510);
+            g.drawString("Or", 300, 510 + scrollOffset);
         }
 
         textBox.render(g, scrollOffset);
