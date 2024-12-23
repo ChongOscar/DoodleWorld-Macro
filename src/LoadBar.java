@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 public class LoadBar extends Interactable {
     private BufferedImage barImage;
@@ -15,9 +16,9 @@ public class LoadBar extends Interactable {
     public LoadBar(int x, int y) {
         super(x, y);
         try {
-            barImage = ImageIO.read(new File("assets/load-bar-image.png"));
-            fillImage = ImageIO.read(new File("assets/fill-bar-image.png"));
-            fillCoverImage = ImageIO.read(new File("assets/fill-cover-image.png"));
+            barImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/assets/load-bar-image.png")));
+            fillImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/assets/fill-bar-image.png")));
+            fillCoverImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/assets/fill-cover-image.png")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -40,7 +41,6 @@ public class LoadBar extends Interactable {
                 fillImageX += 0.3;
                 Utils.wait(1);
             }
-            System.out.println("finish");
             finished = true;
         });
     }

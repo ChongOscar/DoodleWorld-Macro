@@ -67,14 +67,6 @@ public class Runner {
         initSwitches();
         initDetection();
 
-        System.out.println(imageParser.getAverageRGBNoBackground("name", 15));
-        System.out.println(imageParser.getAverageRGBNoBackground("type", 15));
-        System.out.println(parsedPokemonName + "\nclose enough: "
-                + StringSimilarity.isCloseEnough(parsedPokemonName.toLowerCase(), pokemonName.toLowerCase()) + "\n"
-                + "name white: " + isWhite + "\n" + "normal: " + isNormal + "\n"
-                + "captured: " + isCaptured+ "\n" + "skin: " + isSkin + "\n" + "misprint: " + isMisprint + "\n"
-                + "unique: " + isUnique);
-
         matchesCondition = false;
         runAway = true;
 
@@ -98,7 +90,6 @@ public class Runner {
 
     private String getImageText(int x, int y, int width, int height, String name) throws TesseractException {
         screenCapture.captureImage(x, y, width, height, name);
-        System.out.println(imageParser.readImageText(name));
         return imageParser.readImageText(name);
     }
 

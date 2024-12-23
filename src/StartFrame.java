@@ -7,6 +7,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 public class StartFrame implements Runnable {
 
@@ -18,7 +19,7 @@ public class StartFrame implements Runnable {
         frame.setSize(960, 580); // 540 height of image + 40 for window menu bar
         frame.setResizable(false);
         frame.setLocationRelativeTo(null); // auto-centers frame in screen
-        frame.setIconImage(ImageIO.read(new File("assets/icon.png")));
+        frame.setIconImage(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/assets/icon.png"))));
 
         // create and add panel
         panel = new StartPanel(frame);

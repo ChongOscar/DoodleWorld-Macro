@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 public class Switch extends Interactable {
     private BufferedImage switchImage;
@@ -14,8 +15,8 @@ public class Switch extends Interactable {
         super(x, y);
         isOn = false;
         try {
-            switchImage = ImageIO.read(new File("assets/switch-image.png"));
-            switchButton = ImageIO.read(new File("assets/switch-button.png"));
+            switchImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/assets/switch-image.png")));
+            switchButton = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/assets/switch-button.png")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

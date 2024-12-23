@@ -1,8 +1,11 @@
 import javax.imageio.ImageIO;
-import java.awt.Color;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Objects;
+
 import net.sourceforge.tess4j.ITesseract;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
@@ -13,9 +16,7 @@ public class ImageParser {
     public ImageParser() {
         // Initialize Tesseract instance
         tesseract = new Tesseract();
-
-        String projectRoot = System.getProperty("user.dir"); // Get the project's root directory
-        tesseract.setDatapath(projectRoot + "/tessdata");
+        tesseract.setDatapath("tessdata");
 
         // Set the language (e.g., English)
         tesseract.setLanguage("eng");

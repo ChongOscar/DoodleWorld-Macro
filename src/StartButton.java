@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 public class StartButton extends Interactable {
     private BufferedImage buttonImageOn;
@@ -13,8 +14,8 @@ public class StartButton extends Interactable {
         super(x, y);
         isOn = false;
         try {
-            buttonImageOn = ImageIO.read(new File("assets/start-button-on.png"));
-            buttonImageOff = ImageIO.read(new File("assets/start-button-off.png"));
+            buttonImageOn = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/assets/start-button-on.png")));
+            buttonImageOff = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/assets/start-button-off.png")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

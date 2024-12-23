@@ -10,7 +10,7 @@
     <orderEntry type="library" exported="" name="net.java.dev.jna" level="application" />
     <orderEntry type="library" exported="" name="net.java.dev.jna.platform" level="project" />
     <orderEntry type="library" exported="" name="github.kwhat.jnativehook" level="project" />
-    <orderEntry type="library" name="net.sourceforge.tess4j" level="project" />
-    <orderEntry type="library" name="slf4j.simple" level="project" />
+    <orderEntry type="library" exported="" name="net.sourceforge.tess4j" level="project" />
+    <orderEntry type="library" exported="" name="slf4j.simple" level="project" />
   </component>
 </module>

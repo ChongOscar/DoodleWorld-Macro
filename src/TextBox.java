@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 public class TextBox extends Interactable {
     private BufferedImage textBoxImage;
@@ -24,7 +25,7 @@ public class TextBox extends Interactable {
         string = "";
         focusedBlink = "|";
         try {
-            textBoxImage = ImageIO.read(new File(type == NAME ? "assets/name-textbox.png" : "assets/big-textbox.png"));
+            textBoxImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(type == NAME ? "/assets/name-textbox.png" : "/assets/big-textbox.png")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

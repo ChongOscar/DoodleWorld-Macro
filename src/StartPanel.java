@@ -64,7 +64,6 @@ public class StartPanel extends JPanel implements MouseListener, ActionListener 
     public void mousePressed(MouseEvent e) {
         if (e.getButton() == MouseEvent.BUTTON1) {  // left mouse click
             Point mouseClickLocation = e.getPoint();
-            System.out.println(mouseClickLocation);
             if (isStarted) return;
             if (button.getRectangle().contains(mouseClickLocation)) {
                 button.toggle();
