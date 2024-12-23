@@ -3,7 +3,6 @@ import net.sourceforge.tess4j.TesseractException;
 
 import java.awt.*;
 import java.io.IOException;
-import java.util.List;
 
 public class Runner {
     private Macro macro;
@@ -12,6 +11,14 @@ public class Runner {
     private TextBox nameTextBox;
     private TextBox exceptionsTextBox;
     private SwitchList switchList;
+    private Toolkit toolkit;
+    private int screenWidth;
+    private int screenHeight;
+    private int frameWidth;
+    private int frameHeight;
+    private int startX;
+    private int startY;
+    private double screenScale;
 
     String pokemonName;
     String exceptions;
@@ -44,7 +51,11 @@ public class Runner {
     boolean runAway;
 
     public Runner(TextBox nameTextBox, SwitchList switchList, TextBox exceptionsTextBox) throws AWTException {
-        macro = new Macro();
+        toolkit = Toolkit.getDefaultToolkit();
+        screenWidth = toolkit.getScreenSize().width;
+        screenHeight = toolkit.getScreenSize().height;
+        initFrameRes();
+        macro = new Macro(frameWidth, frameHeight, startX, startY, screenScale);
         imageParser = new ImageParser();
         screenCapture = new ScreenCapture();
         this.nameTextBox = nameTextBox;
@@ -83,17 +94,15 @@ public class Runner {
         } else if (runAway){
                 macro.runAway();
         }
-
     }
-
 
     private String getImageText(int x, int y, int width, int height, String name) throws TesseractException {
         screenCapture.captureImage(x, y, width, height, name);
-        String string = imageParser.readImageText(name);
-        return string;
+        System.out.println(imageParser.readImageText(name));
+        return imageParser.readImageText(name);
     }
 
-    private boolean isMoveAvaliable(String str) {
+    private boolean isMoveAvailable(String str) {
         if (str == null || str.isEmpty()) {
             return false;
         }
@@ -118,18 +127,18 @@ public class Runner {
 
     private void attack(boolean attack1Toggle, boolean attack2Toggle, boolean attack3Toggle, boolean attack4Toggle) throws TesseractException {
         macro.fight();
-        String attack1pp = getImageText(670, 810, 140, 40, "attack1");
-        String attack2pp = getImageText(1140, 810, 140, 40, "attack2");
-        String attack3pp = getImageText(1610, 810, 140, 40, "attack3");
-        String attack4pp = getImageText(2080, 810, 140, 40, "attack4");
+        String attack1pp = getImageText(relativeXPos(0.1789), relativeYPos(0.7347), relativeX(0.0737), relativeY(0.0408), "attack1");
+        String attack2pp = getImageText(relativeXPos(0.4263), relativeYPos(0.7347), relativeX(0.0737), relativeY(0.0408), "attack2");
+        String attack3pp = getImageText(relativeXPos(0.6737), relativeYPos(0.7347), relativeX(0.0737), relativeY(0.0408), "attack3");
+        String attack4pp = getImageText(relativeXPos(0.92105), relativeYPos(0.7347), relativeX(0.0737), relativeY(0.0408), "attack4");
         if (isInt(attack1pp)) {
-            if (attack1Toggle && isMoveAvaliable(attack1pp)) {
+            if (attack1Toggle && isMoveAvailable(attack1pp)) {
                 macro.attack(1);
-            } else if (attack2Toggle && isMoveAvaliable(attack2pp)) {
+            } else if (attack2Toggle && isMoveAvailable(attack2pp)) {
                 macro.attack(2);
-            } else if (attack3Toggle && isMoveAvaliable(attack3pp)) {
+            } else if (attack3Toggle && isMoveAvailable(attack3pp)) {
                 macro.attack(3);
-            } else if (attack4Toggle && isMoveAvaliable(attack4pp)) {
+            } else if (attack4Toggle && isMoveAvailable(attack4pp)) {
                 macro.attack(4);
             }
         }
@@ -155,9 +164,13 @@ public class Runner {
     }
 
     private void initDetection() throws IOException, TesseractException {
-        parsedPokemonName = getImageText(370, 140, 500, 60, "name").toLowerCase();
-        screenCapture.captureImage(362, 245, 50, 50, "type");
-        isWhite = imageParser.matchImageColor("name", new Color(200, 200, 200));
+        parsedPokemonName = getImageText(relativeXPos(0.02105), relativeYPos(0.05102), relativeX(0.263), relativeY(0.061), "name").toLowerCase();
+        screenCapture.captureImage(relativeXPos(0.0168421), relativeYPos(0.158163), relativeX(0.0263), relativeY(0.051), "type");
+        if (screenScale != 1) {
+            isWhite = imageParser.matchImageColor("name", new Color(180, 180, 190));
+        } else {
+            isWhite = imageParser.matchImageColor("name", new Color(200, 200, 200));
+        }
         isSkin = imageParser.matchImageColor("name", new Color(120, 50, 60));
         isNormal = imageParser.matchImageColor("type", new Color(0, 0, 0));
         isCaptured = imageParser.matchImageColor("type", new Color(130, 150, 115));
@@ -277,5 +290,40 @@ public class Runner {
             }
         }
     }
+    private void initFrameRes() {
+        if ((double) screenWidth / screenHeight == 64.0 / 27) {
+            frameWidth = 1900;
+            frameHeight = 980;
+            startX = 330;
+            startY = 90;
+            screenScale = 2560.0 / screenWidth;
+        } else if ((double) screenWidth / screenHeight == 16.0 / 9) {
+            frameWidth = 1540;
+            frameHeight = 790;
+            startX = 190;
+            startY = 175;
+            screenScale = 1920.0 / screenWidth;
+        } else if ((double) screenWidth / screenHeight == 16.0 / 10) {
+            frameWidth = 1540;
+            frameHeight = 790;
+            startX = 190;
+            startY = 230;
+            screenScale = 1920.0 / screenWidth;
+        }
+    }
+
+    private int relativeXPos(double pos) {
+        return (int) ((startX + (pos * frameWidth)) / screenScale);
+    }
+    private int relativeYPos(double pos) {
+        return (int) ((startY + (pos * frameHeight)) / screenScale);
+    }
+    private int relativeX(double pos) {
+        return (int) ((pos * frameWidth) / screenScale);
+    }
+    private int relativeY(double pos) {
+        return (int) ((pos * frameHeight) / screenScale);
+    }
+
 }
 

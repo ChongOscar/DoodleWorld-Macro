@@ -4,43 +4,52 @@ import java.awt.event.InputEvent;
 
 public class Macro {
     private Robot robot;
+    private int frameWidth;
+    private int frameHeight;
+    private int startX;
+    private int startY;
+    private double screenScale;
 
-    public Macro() throws AWTException {
+    public Macro(int frameWidth, int frameHeight, int startX, int startY, double screenScale) throws AWTException {
         robot = new Robot();
+        this.frameWidth = frameWidth;
+        this.frameHeight = frameHeight;
+        this.startX = startX;
+        this.startY = startY;
+        this.screenScale = screenScale;
     }
 
     public void attack(int num) {
-        robot.delay(500);
         switch (num) {
             case 1 -> {
-                robot.mouseMove(565, 875);
+                robot.mouseMove(relativeXPos(0.12368), relativeYPos(0.80102));
                 robot.mousePress(InputEvent.BUTTON1_DOWN_MASK); // Press the left mouse button
                 robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK); // Release the left mouse button
-                robot.mouseMove(560, 875);
+                robot.mouseMove(relativeXPos(0.1237), relativeYPos(0.80102));
                 robot.mousePress(InputEvent.BUTTON1_DOWN_MASK); // Press the left mouse button
                 robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK); // Release the left mouse button
             }
             case 2 -> {
-                robot.mouseMove(1050, 875);
+                robot.mouseMove(relativeXPos(0.378947), relativeYPos(0.80102));
                 robot.mousePress(InputEvent.BUTTON1_DOWN_MASK); // Press the left mouse button
                 robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK); // Release the left mouse button
-                robot.mouseMove(1045, 875);
+                robot.mouseMove(relativeXPos(0.379), relativeYPos(0.80102));
                 robot.mousePress(InputEvent.BUTTON1_DOWN_MASK); // Press the left mouse button
                 robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK); // Release the left mouse button
             }
             case 3 -> {
-                robot.mouseMove(1500, 875);
+                robot.mouseMove(relativeXPos(0.615789), relativeYPos(0.80102));
                 robot.mousePress(InputEvent.BUTTON1_DOWN_MASK); // Press the left mouse button
                 robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK); // Release the left mouse button
-                robot.mouseMove(1505, 875);
+                robot.mouseMove(relativeXPos(0.6158), relativeYPos(0.80102));
                 robot.mousePress(InputEvent.BUTTON1_DOWN_MASK); // Press the left mouse button
                 robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK); // Release the left mouse button
             }
             case 4 -> {
-                robot.mouseMove(2000, 875);
+                robot.mouseMove(relativeXPos(0.878947), relativeYPos(0.80102));
                 robot.mousePress(InputEvent.BUTTON1_DOWN_MASK); // Press the left mouse button
                 robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK); // Release the left mouse button
-                robot.mouseMove(2005, 875);
+                robot.mouseMove(relativeXPos(0.879), relativeYPos(0.80102));
                 robot.mousePress(InputEvent.BUTTON1_DOWN_MASK); // Press the left mouse button
                 robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK); // Release the left mouse button
             }
@@ -48,20 +57,27 @@ public class Macro {
     }
 
     public void fight() {
-        robot.mouseMove(565, 1010);
+        robot.mouseMove(relativeXPos(0.123684), relativeYPos(0.9387755));
         robot.mousePress(InputEvent.BUTTON1_DOWN_MASK); // Press the left mouse button
         robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK); // Release the left mouse button
-        robot.mouseMove(570, 1010);
+        robot.mouseMove(relativeXPos(0.1237), relativeYPos(0.9387755));
         robot.mousePress(InputEvent.BUTTON1_DOWN_MASK); // Press the left mouse button
         robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK); // Release the left mouse button
     }
 
     public void runAway() {
-        robot.mouseMove(2000, 1010);
+        robot.mouseMove(relativeXPos(0.878947), relativeYPos(0.9387755));
         robot.mousePress(InputEvent.BUTTON1_DOWN_MASK); // Press the left mouse button
         robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK); // Release the left mouse button
-        robot.mouseMove(2005, 1010);
+        robot.mouseMove(relativeXPos(0.879), relativeYPos(0.9387755));
         robot.mousePress(InputEvent.BUTTON1_DOWN_MASK); // Press the left mouse button
         robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK); // Release the left mouse button
+    }
+
+    private int relativeXPos(double pos) {
+        return (int) ((startX + (pos * frameWidth)) / screenScale);
+    }
+    private int relativeYPos(double pos) {
+        return (int) ((startY + (pos * frameHeight)) / screenScale);
     }
 }
