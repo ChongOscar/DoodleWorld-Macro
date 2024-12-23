@@ -49,10 +49,10 @@ public class GraphicsPanel extends JPanel implements KeyListener, MouseListener,
         switchList.add(new Switch(40, 430), "Any other cosmetics");
         switchList.add(new Switch(40, 490), "Stop condition: ");
         switchList.add(new Switch(590, 470), "Kill exceptions");
-        switchList.add(new Switch(680, 150), "Move 1");
-        switchList.add(new Switch(680, 190), "Move 2");
-        switchList.add(new Switch(680, 230), "Move 3");
-        switchList.add(new Switch(680, 270), "Move 4");
+        switchList.add(new Switch(710, 150), "Move 1");
+        switchList.add(new Switch(710, 190), "Move 2");
+        switchList.add(new Switch(710, 230), "Move 3");
+        switchList.add(new Switch(710, 270), "Move 4");
         bigTextBox = new TextBox(590, 350, TextBox.BIG);
         scrollOffset = 0;
         GlobalScreen.registerNativeHook();

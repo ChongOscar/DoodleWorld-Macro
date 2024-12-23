@@ -18,7 +18,7 @@ public class Runner {
     private int frameHeight;
     private int startX;
     private int startY;
-    private double screenScale;
+    private float screenScale;
 
     String pokemonName;
     String exceptions;
@@ -127,10 +127,10 @@ public class Runner {
 
     private void attack(boolean attack1Toggle, boolean attack2Toggle, boolean attack3Toggle, boolean attack4Toggle) throws TesseractException {
         macro.fight();
-        String attack1pp = getImageText(relativeXPos(0.1789), relativeYPos(0.7347), relativeX(0.0737), relativeY(0.0408), "attack1");
-        String attack2pp = getImageText(relativeXPos(0.4263), relativeYPos(0.7347), relativeX(0.0737), relativeY(0.0408), "attack2");
-        String attack3pp = getImageText(relativeXPos(0.6737), relativeYPos(0.7347), relativeX(0.0737), relativeY(0.0408), "attack3");
-        String attack4pp = getImageText(relativeXPos(0.92105), relativeYPos(0.7347), relativeX(0.0737), relativeY(0.0408), "attack4");
+        String attack1pp = getImageText(relativeXPos(0.1789f), relativeYPos(0.7347f), relativeX(0.0737f), relativeY(0.0408f), "attack1");
+        String attack2pp = getImageText(relativeXPos(0.4263f), relativeYPos(0.7347f), relativeX(0.0737f), relativeY(0.0408f), "attack2");
+        String attack3pp = getImageText(relativeXPos(0.6737f), relativeYPos(0.7347f), relativeX(0.0737f), relativeY(0.0408f), "attack3");
+        String attack4pp = getImageText(relativeXPos(0.92105f), relativeYPos(0.7347f), relativeX(0.0737f), relativeY(0.0408f), "attack4");
         if (isInt(attack1pp)) {
             if (attack1Toggle && isMoveAvailable(attack1pp)) {
                 macro.attack(1);
@@ -164,18 +164,19 @@ public class Runner {
     }
 
     private void initDetection() throws IOException, TesseractException {
-        parsedPokemonName = getImageText(relativeXPos(0.02105), relativeYPos(0.05102), relativeX(0.263), relativeY(0.061), "name").toLowerCase();
-        screenCapture.captureImage(relativeXPos(0.0168421), relativeYPos(0.158163), relativeX(0.0263), relativeY(0.051), "type");
+        parsedPokemonName = getImageText(relativeXPos(0.02105f), relativeYPos(0.05102f), relativeX(0.263f), relativeY(0.061f), "name").toLowerCase();
+        screenCapture.captureImage(relativeXPos(0.0168421f), relativeYPos(0.158163f), relativeX(0.0263f), relativeY(0.051f), "type");
         if (screenScale != 1) {
             isWhite = imageParser.matchImageColor("name", new Color(180, 180, 190));
+            isSkin = imageParser.matchImageColor("name", new Color(170, 20, 30));
         } else {
             isWhite = imageParser.matchImageColor("name", new Color(200, 200, 200));
+            isSkin = imageParser.matchImageColor("name", new Color(190, 10, 10));
         }
-        isSkin = imageParser.matchImageColor("name", new Color(120, 50, 60));
         isNormal = imageParser.matchImageColor("type", new Color(0, 0, 0));
         isCaptured = imageParser.matchImageColor("type", new Color(130, 150, 115));
         isMisprint = imageParser.matchImageColor("type", new Color(65, 65, 25));
-        isUnique = imageParser.matchImageColor("type", new Color(60, 80, 80));
+        isUnique = imageParser.matchImageColor("type", new Color(65, 65, 60));
         isRightPokemon = StringSimilarity.isCloseEnough(parsedPokemonName, pokemonName);
         isException = false;
         if (!exceptions.isEmpty()) {
@@ -296,33 +297,33 @@ public class Runner {
             frameHeight = 980;
             startX = 330;
             startY = 90;
-            screenScale = 2560.0 / screenWidth;
+            screenScale = 2560.0f / screenWidth;
         } else if ((double) screenWidth / screenHeight == 16.0 / 9) {
             frameWidth = 1540;
             frameHeight = 790;
             startX = 190;
             startY = 175;
-            screenScale = 1920.0 / screenWidth;
+            screenScale = 1920.0f / screenWidth;
         } else if ((double) screenWidth / screenHeight == 16.0 / 10) {
             frameWidth = 1540;
             frameHeight = 790;
             startX = 190;
             startY = 230;
-            screenScale = 1920.0 / screenWidth;
+            screenScale = 1920.0f / screenWidth;
         }
     }
 
-    private int relativeXPos(double pos) {
-        return (int) ((startX + (pos * frameWidth)) / screenScale);
+    private int relativeXPos(float pos) {
+        return Math.round(((startX + (pos * frameWidth)) / screenScale));
     }
-    private int relativeYPos(double pos) {
-        return (int) ((startY + (pos * frameHeight)) / screenScale);
+    private int relativeYPos(float pos) {
+        return Math.round(((startY + (pos * frameHeight)) / screenScale));
     }
-    private int relativeX(double pos) {
-        return (int) ((pos * frameWidth) / screenScale);
+    private int relativeX(float pos) {
+        return Math.round(((pos * frameWidth) / screenScale));
     }
-    private int relativeY(double pos) {
-        return (int) ((pos * frameHeight) / screenScale);
+    private int relativeY(float pos) {
+        return Math.round(((pos * frameHeight) / screenScale));
     }
 
 }
