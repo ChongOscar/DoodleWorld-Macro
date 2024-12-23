@@ -6,6 +6,7 @@ import java.io.IOException;
 
 public class Switch {
     private BufferedImage switchImage;
+    private BufferedImage switchButton;
     private int x;
     private int y;
     private boolean isOn;
@@ -18,11 +19,12 @@ public class Switch {
         isOn = false;
         try {
             switchImage = ImageIO.read(new File("assets/switch-image.png"));
+            switchButton = ImageIO.read(new File("assets/switch-button.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         rectangle = new Rectangle(x, y, switchImage.getWidth(), switchImage.getHeight());
-        switchBox = new Rectangle(x, y, switchImage.getWidth() / 2, switchImage.getHeight());
+        switchBox = new Rectangle(x, y, switchButton.getWidth(), switchButton.getHeight());
     }
 
     public int getX() {
@@ -42,7 +44,7 @@ public class Switch {
         rectangle.y = y + scrollOffset;
         g.setColor(Color.black);
         g.drawImage(switchImage, x, displayY, null);
-        g.fillRect((int) switchBox.getX(), (int) switchBox.getY() + scrollOffset, (int) switchBox.getWidth(), (int) switchBox.getHeight());
+        g.drawImage(switchButton, (int) switchBox.getX(), (int) switchBox.getY() + scrollOffset, null);
     }
 
     public void toggle() {

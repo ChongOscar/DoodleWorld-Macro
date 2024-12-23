@@ -5,6 +5,6 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws AWTException, TesseractException, IOException, NativeHookException, InterruptedException {
-        MainFrame f = new MainFrame();
+        StartFrame f = new StartFrame();
     }
 }
