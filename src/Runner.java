@@ -126,10 +126,10 @@ public class Runner {
 
     private void attack(boolean attack1Toggle, boolean attack2Toggle, boolean attack3Toggle, boolean attack4Toggle) throws TesseractException {
         macro.fight();
-        String attack1pp = getImageText(relativeXPos(0.1720779220779f), relativeYPos(0.72784810126582f), relativeX(0.07467532467532f), relativeY(0.050632911392405f), "attack1");
-        String attack2pp = getImageText(relativeXPos(0.428571428571428f), relativeYPos(0.72784810126582f), relativeX(0.07467532467532f), relativeY(0.050632911392405f), "attack2");
-        String attack3pp = getImageText(relativeXPos(0.675324675324675f), relativeYPos(0.72784810126582f), relativeX(0.07467532467532f), relativeY(0.050632911392405f), "attack3");
-        String attack4pp = getImageText(relativeXPos(0.9253246753246753f), relativeYPos(0.72784810126582f), relativeX(0.07467532467532f), relativeY(0.050632911392405f), "attack4");
+        String attack1pp = getImageText(relativeXPos(0.1720779220779f), relativeYPos(0.72784810126582f), relativeX(0.077922077922f), relativeY(0.05696202531645569f), "attack1");
+        String attack2pp = getImageText(relativeXPos(0.424025974025973f), relativeYPos(0.72784810126582f), relativeX(0.077922077922f), relativeY(0.05696202531645569f), "attack2");
+        String attack3pp = getImageText(relativeXPos(0.670779220779220f), relativeYPos(0.72784810126582f), relativeX(0.077922077922f), relativeY(0.05696202531645569f), "attack3");
+        String attack4pp = getImageText(relativeXPos(0.92077922077922f), relativeYPos(0.72784810126582f), relativeX(0.077922077922f), relativeY(0.05696202531645569f), "attack4");
         if (isInt(attack1pp)) {
             if (attack1Toggle && isMoveAvailable(attack1pp)) {
                 macro.attack(1);
