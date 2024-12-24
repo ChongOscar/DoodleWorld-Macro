@@ -67,6 +67,14 @@ public class Runner {
         initSwitches();
         initDetection();
 
+        System.out.println();
+        System.out.println("name avg RGB: " + imageParser.getAverageRGBNoBackground("name", 15));
+        System.out.println("icon avg RGB: " + imageParser.getAverageRGBNoBackground("type", 15));
+        System.out.println("scanned name: " + parsedPokemonName + "close enough: "
+                + StringSimilarity.isCloseEnough(parsedPokemonName.toLowerCase(), pokemonName.toLowerCase()) + "\n"
+                + "name white: " + isWhite + "\n" + "normal: " + isNormal + "\n"
+                + "captured: " + isCaptured+ "\n" + "skin: " + isSkin + "\n" + "misprint: " + isMisprint + "\n"
+                + "unique: " + isUnique);
         matchesCondition = false;
         runAway = true;
 
@@ -118,10 +126,10 @@ public class Runner {
 
     private void attack(boolean attack1Toggle, boolean attack2Toggle, boolean attack3Toggle, boolean attack4Toggle) throws TesseractException {
         macro.fight();
-        String attack1pp = getImageText(relativeXPos(0.1789f), relativeYPos(0.7347f), relativeX(0.0737f), relativeY(0.0408f), "attack1");
-        String attack2pp = getImageText(relativeXPos(0.4263f), relativeYPos(0.7347f), relativeX(0.0737f), relativeY(0.0408f), "attack2");
-        String attack3pp = getImageText(relativeXPos(0.6737f), relativeYPos(0.7347f), relativeX(0.0737f), relativeY(0.0408f), "attack3");
-        String attack4pp = getImageText(relativeXPos(0.92105f), relativeYPos(0.7347f), relativeX(0.0737f), relativeY(0.0408f), "attack4");
+        String attack1pp = getImageText(relativeXPos(0.1720779220779f), relativeYPos(0.72784810126582f), relativeX(0.07467532467532f), relativeY(0.050632911392405f), "attack1");
+        String attack2pp = getImageText(relativeXPos(0.428571428571428f), relativeYPos(0.72784810126582f), relativeX(0.07467532467532f), relativeY(0.050632911392405f), "attack2");
+        String attack3pp = getImageText(relativeXPos(0.675324675324675f), relativeYPos(0.72784810126582f), relativeX(0.07467532467532f), relativeY(0.050632911392405f), "attack3");
+        String attack4pp = getImageText(relativeXPos(0.9253246753246753f), relativeYPos(0.72784810126582f), relativeX(0.07467532467532f), relativeY(0.050632911392405f), "attack4");
         if (isInt(attack1pp)) {
             if (attack1Toggle && isMoveAvailable(attack1pp)) {
                 macro.attack(1);
@@ -155,10 +163,10 @@ public class Runner {
     }
 
     private void initDetection() throws IOException, TesseractException {
-        parsedPokemonName = getImageText(relativeXPos(0.02105f), relativeYPos(0.05102f), relativeX(0.263f), relativeY(0.061f), "name").toLowerCase();
-        screenCapture.captureImage(relativeXPos(0.0168421f), relativeYPos(0.158163f), relativeX(0.0263f), relativeY(0.051f), "type");
+        parsedPokemonName = getImageText(relativeXPos(0.02272727272f), relativeYPos(0.05063291139f), relativeX(0.2435064935f), relativeY(0.056962025316455f), "name").toLowerCase();
+        screenCapture.captureImage(relativeXPos(0.0162337662f), relativeYPos(0.1518987341772f), relativeX(0.02922077922f), relativeY(0.0569620253164f), "type");
         if (screenScale != 1) {
-            isWhite = imageParser.matchImageColor("name", new Color(180, 180, 190));
+            isWhite = imageParser.matchImageColor("name", new Color(175, 180, 190));
             isSkin = imageParser.matchImageColor("name", new Color(170, 20, 30));
         } else {
             isWhite = imageParser.matchImageColor("name", new Color(200, 200, 200));
