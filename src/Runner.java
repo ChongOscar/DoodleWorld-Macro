@@ -1,5 +1,6 @@
 import com.github.kwhat.jnativehook.NativeHookException;
 import net.sourceforge.tess4j.TesseractException;
+import org.apache.commons.logging.Log;
 
 import java.awt.*;
 import java.io.IOException;
@@ -8,6 +9,7 @@ public class Runner {
     private Macro macro;
     private ImageParser imageParser;
     private ScreenCapture screenCapture;
+    private Logger logger;
     private TextBox nameTextBox;
     private TextBox exceptionsTextBox;
     private SwitchList switchList;
@@ -58,6 +60,7 @@ public class Runner {
         macro = new Macro(frameWidth, frameHeight, startX, startY, screenScale);
         imageParser = new ImageParser();
         screenCapture = new ScreenCapture();
+        this.logger = new Logger();
         this.nameTextBox = nameTextBox;
         this.exceptionsTextBox = exceptionsTextBox;
         this.switchList = switchList;
@@ -67,10 +70,10 @@ public class Runner {
         initSwitches();
         initDetection();
 
-        System.out.println();
-        System.out.println("name avg RGB: " + imageParser.getAverageRGBNoBackground("name", 15));
-        System.out.println("icon avg RGB: " + imageParser.getAverageRGBNoBackground("type", 15));
-        System.out.println("scanned name: " + parsedPokemonName + "close enough: "
+        logger.log("-------------------------------------");
+        logger.log("name avg RGB: " + imageParser.getAverageRGBNoBackground("name", 15));
+        logger.log("icon avg RGB: " + imageParser.getAverageRGBNoBackground("type", 15));
+        logger.log("scanned name: " + parsedPokemonName + "close enough: "
                 + StringSimilarity.isCloseEnough(parsedPokemonName.toLowerCase(), pokemonName.toLowerCase()) + "\n"
                 + "name white: " + isWhite + "\n" + "normal: " + isNormal + "\n"
                 + "captured: " + isCaptured+ "\n" + "skin: " + isSkin + "\n" + "misprint: " + isMisprint + "\n"
@@ -130,6 +133,10 @@ public class Runner {
         String attack2pp = getImageText(relativeXPos(0.424025974025973f), relativeYPos(0.72784810126582f), relativeX(0.077922077922f), relativeY(0.05696202531645569f), "attack2");
         String attack3pp = getImageText(relativeXPos(0.670779220779220f), relativeYPos(0.72784810126582f), relativeX(0.077922077922f), relativeY(0.05696202531645569f), "attack3");
         String attack4pp = getImageText(relativeXPos(0.92077922077922f), relativeYPos(0.72784810126582f), relativeX(0.077922077922f), relativeY(0.05696202531645569f), "attack4");
+        logger.log("attack1: " + attack1pp);
+        logger.log("attack2: " + attack2pp);
+        logger.log("attack3: " + attack3pp);
+        logger.log("attack4: " + attack4pp);
         if (isInt(attack1pp)) {
             if (attack1Toggle && isMoveAvailable(attack1pp)) {
                 macro.attack(1);
@@ -145,7 +152,7 @@ public class Runner {
 
     private void initSwitches() {
         pokemonName = nameTextBox.getString().replaceAll("\\s+","").toLowerCase();
-        exceptions = exceptionsTextBox.getString().toLowerCase();
+        exceptions = exceptionsTextBox.getString().replaceAll("\\s+","").toLowerCase();
         misprintSwitch = switchList.get("Misprints").isOn();
         skinsSwitch = switchList.get("Skins").isOn();
         uniquesSwitch = switchList.get("Uniques").isOn();
@@ -197,9 +204,11 @@ public class Runner {
         } else if (anyUniquesSwitch && isUnique && !isCaptured && !isNormal) {
             matchesCondition = true;
             runAway = false;
-        } else if (anyOtherCosmeticSwitch && !isWhite) {
-            matchesCondition = true;
-            runAway = false;
+        } else if (anyOtherCosmeticSwitch) {
+            if (!isWhite || (!isNormal && !isCaptured)) {
+                matchesCondition = true;
+                runAway = false;
+            }
         }
 
         // Check specific switches (requires Pokémon name match)
@@ -213,9 +222,11 @@ public class Runner {
             } else if (uniquesSwitch && isUnique && !isCaptured && !isNormal) {
                 matchesCondition = true;
                 runAway = false;
-            } else if (otherCosmeticSwitch && !isWhite) {
-                matchesCondition = true;
-                runAway = false;
+            } else if (otherCosmeticSwitch) {
+                if (!isWhite || (!isNormal && !isCaptured)) {
+                    matchesCondition = true;
+                    runAway = false;
+                }
             }
         }
     }
@@ -246,15 +257,16 @@ public class Runner {
             runAway = true;
             stop = true;
         }
-        if (anyOtherCosmeticSwitch && !isWhite && !stop) {
-            matchesCondition = true;
-            runAway = false;
-        } else if (anyOtherCosmeticSwitch) {
-            matchesCondition = false;
-            runAway = true;
-            stop = true;
+        if (anyOtherCosmeticSwitch && !stop) {
+            if (!isWhite || (!isNormal && !isCaptured)) {
+                matchesCondition = true;
+                runAway = false;
+            } else {
+                matchesCondition = false;
+                runAway = true;
+                stop = true;
+            }
         }
-
         // Check specific switches (requires Pokémon name match)
         if (isRightPokemon) {
             if (misprintSwitch && isMisprint && !isCaptured && !isNormal && !stop) {
@@ -281,12 +293,14 @@ public class Runner {
                 runAway = true;
                 stop = true;
             }
-            if (otherCosmeticSwitch && !isWhite && !stop) {
-                matchesCondition = true;
-                runAway = false;
-            } else if (otherCosmeticSwitch) {
-                matchesCondition = false;
-                runAway = true;
+            if (otherCosmeticSwitch && !stop) {
+                if (!isWhite || (!isNormal && !isCaptured)) {
+                    matchesCondition = true;
+                    runAway = false;
+                } else {
+                    matchesCondition = false;
+                    runAway = true;
+                }
             }
         }
     }
