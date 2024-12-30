@@ -32,7 +32,7 @@ public class GraphicsPanel extends JPanel implements KeyListener, MouseListener,
 //            System.out.println(e.getMessage());
 //        }
         this.frame = frame;
-        timer = new Timer(250, this);
+        timer = new Timer(333, this);
         timer.start();
         textBox = new TextBox(300, 80, TextBox.NAME);
         button = new Button(520, 80);

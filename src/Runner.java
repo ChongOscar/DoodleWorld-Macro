@@ -51,6 +51,8 @@ public class Runner {
 
     boolean matchesCondition;
     boolean runAway;
+    Color[] nameBackgroundColors;
+    Color[] iconBackgroundColors;
 
     public Runner(TextBox nameTextBox, SwitchList switchList, TextBox exceptionsTextBox) throws AWTException {
         toolkit = Toolkit.getDefaultToolkit();
@@ -64,25 +66,33 @@ public class Runner {
         this.nameTextBox = nameTextBox;
         this.exceptionsTextBox = exceptionsTextBox;
         this.switchList = switchList;
+        nameBackgroundColors = new Color[] {new Color(50, 102, 132), new Color(11,22,29), new Color(46, 204, 113), new Color(243,156,18), new Color(231,76,60), new Color(241,196,15)};
+        iconBackgroundColors = new Color[] {new Color(50, 102, 132), new Color(11,22,29)};
     }
 
     public void run() throws AWTException, IOException, NativeHookException, InterruptedException, TesseractException {
+        screenCapture.captureImage(relativeXPos(0.02272727272f), relativeYPos(0.05063291139f), relativeX(0.2435064935f), relativeY(0.06962025316455696f), "name");
+        parsedPokemonName = imageParser.readImageText("name");
+
+        if (parsedPokemonName.isEmpty()) return;
+
         initSwitches();
         initDetection();
 
         logger.log("-------------------------------------");
-        logger.log("name avg RGB: " + imageParser.getAverageRGBNoBackground("name", 15));
-        logger.log("icon avg RGB: " + imageParser.getAverageRGBNoBackground("type", 15));
-        logger.log("scanned name: " + parsedPokemonName + "close enough: "
-                + StringSimilarity.isCloseEnough(parsedPokemonName.toLowerCase(), pokemonName.toLowerCase()) + "\n"
-                + "name white: " + isWhite + "\n" + "normal: " + isNormal + "\n"
-                + "captured: " + isCaptured+ "\n" + "skin: " + isSkin + "\n" + "misprint: " + isMisprint + "\n"
-                + "unique: " + isUnique);
+        logger.log("name avg RGB: " + imageParser.getAverageRGB("name"));
+        logger.log("icon avg RGB: " + imageParser.getAverageRGB("type"));
+        logger.log("scanned name: " + parsedPokemonName +
+                "\nclose enough: " + StringSimilarity.isCloseEnough(parsedPokemonName, pokemonName) +
+                "\nname white: " + isWhite +
+                "\nnormal: " + isNormal +
+                "\ncaptured: " + isCaptured+
+                "\nskin: " + isSkin +
+                "\nmisprint: " + isMisprint +
+                "\nunique: " + isUnique);
+
         matchesCondition = false;
         runAway = true;
-
-        if (parsedPokemonName.isEmpty()) return;
-
         if (stopConditionSwitch) {
             andLogic();
         } else {
@@ -99,8 +109,9 @@ public class Runner {
         }
     }
 
-    private String getImageText(int x, int y, int width, int height, String name) throws TesseractException {
+    private String getAttackPP(int x, int y, int width, int height, String name) throws TesseractException, IOException {
         screenCapture.captureImage(x, y, width, height, name);
+        imageParser.isolateWhiteText(name);
         return imageParser.readImageText(name);
     }
 
@@ -127,12 +138,12 @@ public class Runner {
         }
     }
 
-    private void attack(boolean attack1Toggle, boolean attack2Toggle, boolean attack3Toggle, boolean attack4Toggle) throws TesseractException {
+    private void attack(boolean attack1Toggle, boolean attack2Toggle, boolean attack3Toggle, boolean attack4Toggle) throws TesseractException, IOException {
         macro.fight();
-        String attack1pp = getImageText(relativeXPos(0.1720779220779f), relativeYPos(0.72784810126582f), relativeX(0.077922077922f), relativeY(0.05696202531645569f), "attack1");
-        String attack2pp = getImageText(relativeXPos(0.424025974025973f), relativeYPos(0.72784810126582f), relativeX(0.077922077922f), relativeY(0.05696202531645569f), "attack2");
-        String attack3pp = getImageText(relativeXPos(0.670779220779220f), relativeYPos(0.72784810126582f), relativeX(0.077922077922f), relativeY(0.05696202531645569f), "attack3");
-        String attack4pp = getImageText(relativeXPos(0.92077922077922f), relativeYPos(0.72784810126582f), relativeX(0.077922077922f), relativeY(0.05696202531645569f), "attack4");
+        String attack1pp = getAttackPP(relativeXPos(0.1720779220779f), relativeYPos(0.72784810126582f), relativeX(0.077922077922f), relativeY(0.05696202531645569f), "attack1");
+        String attack2pp = getAttackPP(relativeXPos(0.424025974025973f), relativeYPos(0.72784810126582f), relativeX(0.077922077922f), relativeY(0.05696202531645569f), "attack2");
+        String attack3pp = getAttackPP(relativeXPos(0.670779220779220f), relativeYPos(0.72784810126582f), relativeX(0.077922077922f), relativeY(0.05696202531645569f), "attack3");
+        String attack4pp = getAttackPP(relativeXPos(0.92077922077922f), relativeYPos(0.72784810126582f), relativeX(0.077922077922f), relativeY(0.05696202531645569f), "attack4");
         logger.log("attack1: " + attack1pp);
         logger.log("attack2: " + attack2pp);
         logger.log("attack3: " + attack3pp);
@@ -170,13 +181,18 @@ public class Runner {
     }
 
     private void initDetection() throws IOException, TesseractException {
-        parsedPokemonName = getImageText(relativeXPos(0.02272727272f), relativeYPos(0.05063291139f), relativeX(0.2435064935f), relativeY(0.056962025316455f), "name").toLowerCase();
         screenCapture.captureImage(relativeXPos(0.0162337662f), relativeYPos(0.1518987341772f), relativeX(0.02922077922f), relativeY(0.0569620253164f), "type");
+        imageParser.removeBackgroundColor("name", nameBackgroundColors);
+        imageParser.removeBackgroundColor("type", iconBackgroundColors);
+        imageParser.isolateNameText("name");
+
+        parsedPokemonName = imageParser.readImageText("name_OCR").toLowerCase();
+
         if (screenScale != 1) {
-            isWhite = imageParser.matchImageColor("name", new Color(175, 180, 190));
+            isWhite = imageParser.matchImageColor("name", new Color(165, 180, 190));
             isSkin = imageParser.matchImageColor("name", new Color(170, 20, 30));
         } else {
-            isWhite = imageParser.matchImageColor("name", new Color(200, 200, 200));
+            isWhite = imageParser.matchImageColor("name", new Color(193, 200, 200));
             isSkin = imageParser.matchImageColor("name", new Color(190, 10, 10));
         }
         isNormal = imageParser.matchImageColor("type", new Color(0, 0, 0));
